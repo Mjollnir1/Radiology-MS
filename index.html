@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUT Radiology Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="mb-4 md:mb-6">
+        <button id="sidebar-toggle" class="md:hidden inline-flex items-center gap-2 px-3 py-2 rounded border border-gray-300 text-gray-700 bg-white shadow-sm">
+            <span>Menu</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm1 4a1 1 0 000 2h12a1 1 0 100-2H4z" clip-rule="evenodd"/></svg>
+        </button>
+    </div>
+    <div class="flex items-start gap-4">
+        <aside id="sidebar" class="w-64 bg-gray-50 border border-gray-200 rounded-xl p-4 hidden md:block">
+            <nav class="space-y-2">
+                <button id="dashboards-toggle" class="w-full flex items-center justify-between px-3 py-2 rounded text-left bg-white border border-gray-200 hover:bg-gray-50">
+                    <span class="font-medium text-gray-800">Dashboards</span>
+                    <svg id="dashboards-caret" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+                </button>
+                <div id="dashboards-group" class="ml-2 mt-1 space-y-1 hidden">
+                    <a href="#" data-section="client-interface" class="block px-3 py-2 rounded text-gray-700 hover:bg-white hover:shadow">Client</a>
+                    <a href="#" data-section="staff-interface" class="block px-3 py-2 rounded text-gray-700 hover:bg-white hover:shadow">Staff</a>
+                    <a href="#" data-section="admin-interface" class="block px-3 py-2 rounded text-gray-700 hover:bg-white hover:shadow">Admin</a>
+                </div>
+                <a href="#" data-section="login-container" class="block px-3 py-2 rounded bg-white border border-gray-200 text-gray-800 hover:bg-gray-50">Login</a>
+                <a href="#" data-section="booking-section" class="block px-3 py-2 rounded bg-white border border-gray-200 text-gray-800 hover:bg-gray-50">Book Appointment</a>
+                <a href="#" data-section="today-alert-container" class="block px-3 py-2 rounded bg-white border border-gray-200 text-gray-800 hover:bg-gray-50">Today Alert</a>
+                <a href="#" data-section="map-section" class="block px-3 py-2 rounded bg-white border border-gray-200 text-gray-800 hover:bg-gray-50">Map</a>
+                <a href="reset.html" class="block px-3 py-2 rounded bg-indigo-600 text-white text-center hover:bg-indigo-700">Reset Password</a>
+            </nav>
+        </aside>
+        <main class="flex-1">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-10 border border-gray-200">
+        <header class="text-center mb-6">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">DUT Radiology Clinic</h1>
+            <p class="text-gray-600">A new era in medical imaging technology.</p>
+            <p class="text-gray-500 text-sm mt-1"></p>
+        </header>
+
+        <div id="login-container" class="mb-8 hidden-section">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Login to Your Account</h2>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label for="login-email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input type="email" id="login-email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
+                    <p id="email-error" class="mt-1 text-sm text-red-500 hidden"></p>
+                </div>
+                
+                <div>
+                    <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="login-password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
+                    <p id="password-error" class="mt-1 text-sm text-red-500 hidden"></p>
+                    <p class="mt-1 text-xs text-gray-500">Student Password</p>
+                    <div class="text-right mt-2">
+                        <a href="#" id="forgot-password-link" class="text-sm text-indigo-600 hover:text-indigo-500">Forgot Password?</a>
+                    </div>
+                </div>
+                <button type="submit" id="login-button" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Login</button>
+            </form>
+            <p id="login-message" class="mt-4 text-center"></p>
+        </div>
+
+        <div id="today-alert-container" class="hidden-section hidden">
+            <div id="today-alert" class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded-lg mb-6 shadow-sm" role="alert">
+                <p class="font-bold">Reminder!</p>
+                <p>You have an appointment today.</p>
+            </div>
+        </div>
+
+        <div class="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200 hidden-section hidden">
+            <p class="text-gray-700 text-sm font-medium mb-1">Your User ID (for sharing/collaboration):</p>
+            <p id="user-id" class="text-xs text-gray-500 break-all"></p>
+        </div>
+
+        <div id="booking-section" class="mb-8 hidden-section hidden">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Book a New Appointment</h2>
+            <form id="appointment-form" class="space-y-4">
+                <div>
+                    <label for="patient-name" class="block text-sm font-medium text-gray-700">Patient Name</label>
+                    <input type="text" id="patient-name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
+                </div>
+                <div>
+                    <label for="appointment-date" class="block text-sm font-medium text-gray-700">Date</label>
+                    <input type="date" id="appointment-date" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
+                </div>
+                <div>
+                    <label for="appointment-time" class="block text-sm font-medium text-gray-700">Time</label>
+                    <input type="time" id="appointment-time" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
+                </div>
+                <div>
+                    <label for="consultation-type" class="block text-sm font-medium text-gray-700">Consultation Type</label>
+                    <select id="consultation-type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border bg-white">
+                        <option value="">Select a type</option>
+                        <option value="X-Ray">X-Ray</option>
+                        <option value="CT Scan">CT Scan</option>
+                        <option value="MRI">MRI</option>
+                        <option value="Ultrasound">Ultrasound</option>
+                    </select>
+                </div>
+                <button type="submit" id="book-button" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Book Appointment</button>
+            </form>
+            <p id="form-message" class="mt-4 text-center"></p>
+        </div>
+
+        <div id="staff-interface" class="hidden-section hidden">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Staff Dashboard</h2>
+            <div class="mb-6">
+                <h3 class="text-lg font-medium text-gray-700 mb-3">All Appointments</h3>
+                <div class="flex gap-2 mb-4">
+                    <select id="status-filter" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border" aria-label="Filter by status">
+                        <option value="">All Status</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <input type="date" id="date-filter" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border" aria-label="Filter by date">
+                </div>
+                <div id="staff-appointments-list" class="space-y-4">
+                    <p id="staff-loading-message" class="text-center text-gray-500">Loading appointments...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-interface" class="hidden-section hidden">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Admin Dashboard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <h3 class="text-lg font-medium text-blue-800 mb-2">System Overview</h3>
+                    <p class="text-blue-600 text-sm">Total Appointments: <span id="total-appointments">0</span></p>
+                    <p class="text-blue-600 text-sm">Active Users: <span id="active-users">0</span></p>
+                    <p class="text-blue-600 text-sm">Today's Appointments: <span id="today-appointments">0</span></p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                    <h3 class="text-lg font-medium text-green-800 mb-2">Quick Actions</h3>
+                    <button class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700 mr-2">Manage Users</button>
+                    <button class="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700">System Settings</button>
+                </div>
+            </div>
+            <div class="mb-6">
+                <h3 class="text-lg font-medium text-gray-700 mb-3">All Appointments</h3>
+                <div class="flex gap-2 mb-4">
+                    <select id="admin-status-filter" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border" aria-label="Filter by status">
+                        <option value="">All Status</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <input type="date" id="admin-date-filter" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border" aria-label="Filter by date">
+                </div>
+                <div id="admin-appointments-list" class="space-y-4">
+                    <p id="admin-loading-message" class="text-center text-gray-500">Loading appointments...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="client-interface" class="hidden-section hidden">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Your Appointments</h2>
+            <div id="appointments-list" class="space-y-4">
+                <p id="loading-message" class="text-center text-gray-500">Loading appointments...</p>
+            </div>
+        </div>
+
+        ---
+        
+        <div id="map-section" class="mt-8 hidden-section hidden">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Find Our Clinic</h2>
+            <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                <iframe
+                    src="https://maps.google.com/maps?q=Dut%20Radiographic%20clinic%20Umlazi&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="450"
+                    allowfullscreen=""
+                    loading="lazy"
+                    title="Dut Radiographic Clinic Location Map"
+                ></iframe>
+            </div>
+            <p class="text-center text-sm text-gray-600 mt-2">Dut Radiographic Clinic, Umlazi, KwaZulu-Natal, South Africa</p>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.hidden-section');
+            sections.forEach(section => {
+                if (!section.classList.contains('hidden')) {
+                    section.classList.add('hidden');
+                }
+            });
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Default to last active section (persisted), else login
+            const savedSection = localStorage.getItem('activeSection');
+            showSection(savedSection || 'login-container');
+
+            // Forgot password handler (guarded)
+            const forgotLink = document.getElementById('forgot-password-link');
+            if (forgotLink) {
+                // Navigate to reset page
+                forgotLink.setAttribute('href', 'reset.html');
+            }
+
+            // Basic login handling with role-based routing (client/staff/admin)
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const emailInput = document.getElementById('login-email');
+                    const passwordInput = document.getElementById('login-password');
+                    const emailError = document.getElementById('email-error');
+                    const passwordError = document.getElementById('password-error');
+
+                    if (emailError) {
+                        emailError.textContent = '';
+                        emailError.classList.add('hidden');
+                    }
+                    if (passwordError) {
+                        passwordError.textContent = '';
+                        passwordError.classList.add('hidden');
+                    }
+
+                    let isValid = true;
+                    if (emailInput && !emailInput.value.trim()) {
+                        if (emailError) {
+                            emailError.textContent = 'Email is required';
+                            emailError.classList.remove('hidden');
+                        }
+                        isValid = false;
+                    }
+                    if (passwordInput && !passwordInput.value.trim()) {
+                        if (passwordError) {
+                            passwordError.textContent = 'Password is required';
+                            passwordError.classList.remove('hidden');
+                        }
+                        isValid = false;
+                    }
+
+                    if (!isValid) return;
+
+                    // Determine role by email
+                    const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+                    let destination = 'client-interface';
+                    if (email === 'ntuthukolwandisa@gmail.com') {
+                        destination = 'admin-interface';
+                    } else if (email.includes('staff')) {
+                        destination = 'staff-interface';
+                    }
+
+                    // Navigate and persist
+                    showSection(destination);
+                    localStorage.setItem('activeSection', destination);
+                    if (['client-interface','staff-interface','admin-interface'].includes(destination)) {
+                        localStorage.setItem('lastDashboard', destination);
+                        localStorage.setItem('dashboardsOpen', 'true');
+                    }
+
+                    // Update sidebar highlight if helper is available
+                    if (window.setActiveSectionHighlight) {
+                        window.setActiveSectionHighlight(destination);
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        // Sidebar interactivity
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            const dashboardsToggle = document.getElementById('dashboards-toggle');
+            const dashboardsGroup = document.getElementById('dashboards-group');
+            const dashboardsCaret = document.getElementById('dashboards-caret');
+            const navLinks = sidebar ? sidebar.querySelectorAll('[data-section]') : null;
+            const dashboardIds = new Set(['client-interface','staff-interface','admin-interface']);
+
+            if (toggleBtn && sidebar) {
+                toggleBtn.addEventListener('click', () => {
+                    sidebar.classList.toggle('hidden');
+                });
+            }
+
+            if (dashboardsToggle && dashboardsGroup && dashboardsCaret) {
+                // Restore dashboards open state, or force open if a dashboard is active
+                const savedActive = localStorage.getItem('activeSection');
+                const savedLastDash = localStorage.getItem('lastDashboard');
+                const open = localStorage.getItem('dashboardsOpen') === 'true' || (savedActive && dashboardIds.has(savedActive)) || (savedLastDash && dashboardIds.has(savedLastDash));
+                if (open) {
+                    dashboardsGroup.classList.remove('hidden');
+                    dashboardsCaret.style.transform = 'rotate(180deg)';
+                }
+
+                dashboardsToggle.addEventListener('click', () => {
+                    dashboardsGroup.classList.toggle('hidden');
+                    const isOpen = !dashboardsGroup.classList.contains('hidden');
+                    dashboardsCaret.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                    localStorage.setItem('dashboardsOpen', String(isOpen));
+                });
+            }
+
+            // Wire nav links
+            function setActive(sectionId) {
+                if (!navLinks) return;
+                navLinks.forEach(l => {
+                    l.classList.remove('bg-indigo-50','text-indigo-700','border-indigo-200');
+                    l.classList.add('bg-white','text-gray-800');
+                });
+                const active = Array.from(navLinks).find(l => l.getAttribute('data-section') === sectionId);
+                if (active) {
+                    active.classList.remove('bg-white','text-gray-800');
+                    active.classList.add('bg-indigo-50','text-indigo-700','border-indigo-200');
+                }
+            }
+
+            // Expose a small helper for other scripts
+            window.setActiveSectionHighlight = setActive;
+
+            if (navLinks) {
+                navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = e.currentTarget;
+                    const sectionId = target.getAttribute('data-section');
+                    if (sectionId) {
+                        showSection(sectionId);
+                            localStorage.setItem('activeSection', sectionId);
+                            if (dashboardIds.has(sectionId)) {
+                                localStorage.setItem('lastDashboard', sectionId);
+                                // Ensure dropdown is open when navigating to a dashboard
+                                if (dashboardsGroup && dashboardsGroup.classList.contains('hidden')) {
+                                    dashboardsGroup.classList.remove('hidden');
+                                    if (dashboardsCaret) dashboardsCaret.style.transform = 'rotate(180deg)';
+                                    localStorage.setItem('dashboardsOpen', 'true');
+                                }
+                            }
+                            setActive(sectionId);
+                        if (window.innerWidth < 768) {
+                            sidebar.classList.add('hidden');
+                        }
+                    }
+                });
+                });
+
+                // Initialize active state based on persisted section, prefer last dashboard if relevant
+                let initial = localStorage.getItem('activeSection') || 'login-container';
+                const lastDash = localStorage.getItem('lastDashboard');
+                if (lastDash && dashboardIds.has(lastDash)) {
+                    initial = lastDash;
+                }
+                setActive(initial);
+            }
+        });
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
