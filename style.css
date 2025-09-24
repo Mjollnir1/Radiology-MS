@@ -1,0 +1,36 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+}
+
+/* Login form validation styles */
+.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.success {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Smooth transitions for form elements */
+input[type="email"], input[type="tel"], input[type="password"] {
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Phone number input formatting */
+#login-phone {
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+/* Hidden sections initially */
+.hidden-section {
+    display: none;
+}
+
+/* Iframe styling */
+iframe {
+    border: 0;
+}
